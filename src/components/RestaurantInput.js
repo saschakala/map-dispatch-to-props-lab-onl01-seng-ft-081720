@@ -23,7 +23,8 @@ export class RestaurantInput extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    // add missing code
+    this.props.addRestaurant(this.state) 
+    // this.state needs to be passed in as an argument b/c addRestaurant is a customized creation action with the addition of restaurant as part of the object
   }
 
   render() {
@@ -49,6 +50,12 @@ export class RestaurantInput extends Component {
   }
 };
 
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    location: state.location
+  }
+}
 
 //connect this component by wrapping RestaurantInput below
-export default RestaurantInput
+export default connect(mapStateToProps, {addRestaurant})(RestaurantInput)
